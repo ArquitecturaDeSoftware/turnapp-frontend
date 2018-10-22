@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 //components
 import MenuInfoComponent from "../../components/MenuInfoComponent";
 import PriceNTimeInfoComponent from "../../components/PriceNTimeInfoComponent";
-
 
 class LunchroomModalComponent extends Component {
 
@@ -30,6 +30,27 @@ class LunchroomModalComponent extends Component {
     this.state = {
       currentTime:this.info.line
     }
+    
+    axios({
+      url: 'http://35.229.97.157:5000/graphql/?',
+      method: 'post',
+      data: {
+        query: `
+          query{
+            allStatistics{
+              t{
+                date
+              }
+            }
+          }
+          `
+      }
+    }).then((result) => {
+      console.log(result.data)
+    }).catch(error => {
+      console.log(error)
+    });
+
   }
   tick(){
     this.setState(( prevState, props ) => ({
