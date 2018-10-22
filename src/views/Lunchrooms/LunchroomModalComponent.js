@@ -79,8 +79,7 @@ class LunchroomModalComponent extends Component {
                 line={this.info.line}
                 time={this.state.currentTime}
                 />
-
-                //En vez de "1", colocar el id del turno creado
+                
                 <Link to="tickets/1">
                   <button type="button"
                   className="btn btn-primary btn-lg btn-block"
