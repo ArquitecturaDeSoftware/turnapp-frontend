@@ -1,0 +1,46 @@
+<div className="Ticket">
+  <div className="color">
+    <h1 className="title">Turnos</h1>
+  </div>
+  <div className="container">
+    <div className="row" style={{marginTop:"5%"}}>
+      <div className="col-md-4">
+        <div className="thumbnail">
+          <img src={ biologia }
+          className="small"
+          alt={ this.props.name }/>
+        </div>
+      </div>
+      <div className="col-md-4">
+
+      </div>
+      <div className="col-md-4">
+        <div className="ticket-container">
+          <h1 className="ticket-text">Hello</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div className="lunchroom-container">
+    <div className="row">
+      <div className="col-md-6">
+        <MenuInfoComponent
+        soup={this.menu.soup}
+        appetizer={this.menu.appetizer}
+        main_course={this.menu.main_course}
+        protein={this.menu.protein}
+        juice={this.menu.juice}
+        dessert={this.menu.dessert}
+        salad={this.menu.salad}
+        />
+      </div>
+      <div className="col-md-6">
+        <PriceNTimeInfoComponent
+        price={this.info.price}
+        line={this.info.line}
+        time={this.props.time}
+        />
+      </div>
+    </div>
+  </div>
+</div>

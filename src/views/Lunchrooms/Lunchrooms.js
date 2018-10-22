@@ -32,7 +32,7 @@ class Lunchrooms extends Component {
     return (
       <div className="Lunchrooms">
         <div className="color">
-          <h1 className="title">TurnApp</h1>
+          <h1 className="title">Restaurantes</h1>
         </div>
         <div className="container container-container">
           <div className="row">
@@ -42,7 +42,6 @@ class Lunchrooms extends Component {
               name={lunchroom.name}
               src={lunchroom.src}
               ed={lunchroom.ed}/>) }
-
           </div>
         </div>
       </div>
