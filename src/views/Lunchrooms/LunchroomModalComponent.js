@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
+//components
+import MenuInfoComponent from "../../components/MenuInfoComponent";
+import PriceNTimeInfoComponent from "../../components/PriceNTimeInfoComponent";
+
 
 class LunchroomModalComponent extends Component {
 
@@ -54,111 +60,35 @@ class LunchroomModalComponent extends Component {
               </div>
             </div>
           </div>
-          <div className="row lunchroom-container">
-            <div className="col-md-12">
+          <div className="lunchroom-container">
+            <div className="row">
               <div className="col-md-6">
-                <div className="menu-container">
-                  <h3 style={{color:"#337AB7"}}>Menú</h3>
-                  <table className="table table-striped">
-                    <tbody>
-                      <tr>
-                        <th style={{color:"#32CD32"}}>Sopa</th>
-                        <th>
-                          <span className="label label-default">
-                            {this.menu.soup}
-                          </span>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th style={{color:"#32CD32"}}>Principio</th>
-                        <th>
-                          <span className="label label-default">
-                            {this.menu.appetizer}
-                          </span>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th style={{color:"#32CD32"}}>Seco</th>
-                        <th>
-                          <span className="label label-default">
-                            {this.menu.main_course}
-                          </span>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th style={{color:"#32CD32"}}>Proteina</th>
-                        <th>
-                          <span className="label label-default">
-                            {this.menu.protein}
-                          </span>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th style={{color:"#32CD32"}}>Jugo</th>
-                        <th>
-                          <span className="label label-default">
-                            {this.menu.juice}
-                          </span>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th style={{color:"#32CD32"}}>Postre</th>
-                        <th>
-                          <span className="label label-default">
-                            {this.menu.dessert}
-                          </span>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th style={{color:"#32CD32"}}>Ensalada</th>
-                        <th>
-                          <span className="label label-default">
-                            {this.menu.salad}
-                          </span>
-                        </th>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                <MenuInfoComponent
+                soup={this.menu.soup}
+                appetizer={this.menu.appetizer}
+                main_course={this.menu.main_course}
+                protein={this.menu.protein}
+                juice={this.menu.juice}
+                dessert={this.menu.dessert}
+                salad={this.menu.salad}
+                />
               </div>
               <div className="col-md-6">
-                <div className="menu-container">
-                  <h3 style={{color:"#337AB7"}}>Información</h3>
-                  <table className="table table-striped">
-                    <tbody>
-                      <tr>
-                        <th style={{color:"#32CD32"}}>Precio</th>
-                        <th>
-                        <span className="label label-info">
-                          {this.info.price} pesos
-                        </span>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th style={{color:"#32CD32"}}>Turnos restantes</th>
-                        <th>
-                          <span className="label label-info">
-                            {this.info.line}
-                          </span>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th style={{color:"#32CD32"}}>Tiempo de espera</th>
-                        <th>
-                          <span className="label label-info">
-                          {this.state.currentTime>=0 ? this.state.currentTime : 0}
-                          {this.state.currentTime>=1 ? " minutos" : " minuto"}
-                          </span>
-                        </th>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <button type="button"
-                className="btn btn-primary btn-lg btn-block"
-                name="button">
-                  pedir turno
-                </button>
+                <PriceNTimeInfoComponent
+                price={this.info.price}
+                line={this.info.line}
+                time={this.state.currentTime}
+                />
+
+                //En vez de "1", colocar el id del turno creado
+                <Link to="tickets/1">
+                  <button type="button"
+                  className="btn btn-primary btn-lg btn-block"
+                  name="button"
+                  style={{marginBottom:"2%"}}>
+                    pedir turno
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

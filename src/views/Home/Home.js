@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
+//css
 import './Home.css';
 
 //images
@@ -62,6 +65,11 @@ class Home extends Component {
                     alt="ciencias_economicas"/>
                   </div>
                   <div className="item">
+                    <img src={ciencias_humanas}
+                    className="img-responsive"
+                    alt="ciencias_humanas"/>
+                  </div>
+                  <div className="item">
                     <img src={comedor_central}
                     className="img-responsive"
                     alt="comedor_central"/>
@@ -98,18 +106,20 @@ class Home extends Component {
                 <h2 style={{color:"#337AB7"}}>Ingresar</h2>
                 <hr/>
                 <div
-                class="input-group"
+                className="input-group"
                 style={{marginTop:"25%"}}>
-                  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                  <input id="email" type="text" class="form-control" name="cedula" placeholder="Cédula"/>
+                  <span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
+                  <input id="email" type="text" className="form-control" name="cedula" placeholder="Cédula"/>
                 </div>
-                <button
-                type="button"
-                name="ingresar"
-                className="btn btn-success btn-lg btn-block"
-                style={{marginTop:"5%"}}>
-                  Ingresar
-                </button>
+                <Link to="/lunchrooms">
+                  <button
+                  type="button"
+                  name="ingresar"
+                  className="btn btn-success btn-lg btn-block"
+                  style={{marginTop:"5%"}}>
+                    Ingresar
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
