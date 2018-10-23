@@ -25,11 +25,13 @@ class LunchroomModalComponent extends Component {
     line:20,
     time:10
   }
+
   constructor( props ){
     super( props );
     this.state = {
       currentTime:this.info.line,
-      menu:{}
+      menu:{},
+      a:2
     }
 
     axios({
@@ -54,7 +56,6 @@ class LunchroomModalComponent extends Component {
         this.setState({
           menu: result.data.data.menusByRestaurant[0] 
         })
-        console.log(this.state.menu)
     }).catch(error => {
       console.log(error)
     });
@@ -109,14 +110,12 @@ class LunchroomModalComponent extends Component {
                   line={this.info.line}
                   time={this.state.currentTime}
                 />
-
-    //En vez de "1", colocar el id del turno creado
-                <Link to="tickets/1">
+                <Link to={{ pathname: `tickets/${this.state.a}`, state: { name_l:this.props.name, i:this.props.i} }}>
                   <button type="button"
                   className="btn btn-primary btn-lg btn-block"
                   name="button"
                   style={{marginBottom:"2%"}}>
-                    pedir turno
+                    Pedir turno
                   </button>
                 </Link>
               </div>

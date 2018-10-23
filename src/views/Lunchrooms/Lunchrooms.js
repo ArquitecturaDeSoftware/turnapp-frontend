@@ -69,7 +69,8 @@ class Lunchrooms extends Component {
               id_lunchroom={lunchroom._id}
               name={lunchroom.name}
               src={this.state.srcs[i]}
-              ed={"Edificio: "+lunchroom.building}/>) }
+              ed={"Edificio: "+lunchroom.building}
+              i={i}/>) }
           </div>
         </div>
       </div>

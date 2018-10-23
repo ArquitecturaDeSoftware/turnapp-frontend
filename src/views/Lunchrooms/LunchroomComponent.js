@@ -35,9 +35,10 @@ class LunchroomComponent extends Component {
               <Modal isOpen={this.state.isActive}
               onRequestClose={this.toggleModal}>
                 <LunchroomModalComponent
-                id_lunchroom={this.props.id_lunchroom}
-                name={this.props.name}
-                src={this.props.src}/>
+                  id_lunchroom={this.props.id_lunchroom}
+                  name={this.props.name}
+                  src={this.props.src}
+                  i={this.props.i}/>
               </Modal>
             </div>
           </div>

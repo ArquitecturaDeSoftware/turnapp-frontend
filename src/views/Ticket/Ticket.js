@@ -8,6 +8,15 @@ import PriceNTimeInfoComponent from "../../components/PriceNTimeInfoComponent";
 import "./Ticket.css";
 
 import biologia from '../../images/lunchrooms/biologia.png';
+import cafe_campus from '../../images/lunchrooms/cafe-campus.png';
+import ciencias_agrarias from '../../images/lunchrooms/ciencias-agrarias.png';
+import ciencias_economicas from '../../images/lunchrooms/ciencias-economicas.png';
+import ciencias_humanas from '../../images/lunchrooms/ciencias-humanas.png';
+import comedor_central from '../../images/lunchrooms/comedor-central.png';
+import hemeroteca from '../../images/lunchrooms/hemeroteca.png';
+import matematicas from '../../images/lunchrooms/matematicas.png';
+import odontologia from '../../images/lunchrooms/odontologia.png';
+import geologia from '../../images/lunchrooms/geologia.png';
 
 class Ticket extends Component {
   menu={
@@ -27,18 +36,25 @@ class Ticket extends Component {
     line:20,
     time:10
   }
+  constructor(){
+    super()
+    this.state={
+      srcs : [geologia, comedor_central, biologia, cafe_campus, ciencias_agrarias, ciencias_economicas, ciencias_humanas,
+        hemeroteca, matematicas, odontologia]
+    };
+  }
 
   render() {
     return (
       <div className="Ticket">
         <div className="color">
-          <h1 className="title">Turnos</h1>
+          <h1 className="title">Turno solicitado en {this.props.location.state.name_l} </h1>
         </div>
         <div className="container">
           <div className="row" style={{marginTop:"2%"}}>
             <div className="col-md-4">
               <div className="thumbnail">
-                <img src={ biologia }
+                <img src={ this.state.srcs[this.props.location.state.i] }
                 className="small"
                 alt={ this.props.name }/>
               </div>
