@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Link } from 'react-router-dom';
+
 //Components
 import MenuInfoComponent from "../../components/MenuInfoComponent";
 import PriceNTimeInfoComponent from "../../components/PriceNTimeInfoComponent";
@@ -72,12 +74,14 @@ class Ticket extends Component {
               line={this.info.line}
               currentTime={this.props.currentTime}
               />
-              <button type="button"
-              className="btn btn-danger btn-lg btn-block"
-              name="button"
-              style={{marginBottom:"2%"}}>
-                cancelar turno
-              </button>
+              <Link to="/lunchrooms">
+                <button type="button"
+                className="btn btn-danger btn-lg btn-block"
+                name="cancelar"
+                style={{marginBottom:"2%"}}>
+                  cancelar turno
+                </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -7,6 +7,7 @@ import Home from "./views/Home/Home";
 import Lunchrooms from "./views/Lunchrooms/Lunchrooms";
 import Ticket from "./views/Ticket/Ticket";
 import Admin from "./views/Admin/Admin";
+import Comments from "./views/Comments/Comments";
 
 class AppRoutes extends Component {
   render(){
@@ -17,6 +18,7 @@ class AppRoutes extends Component {
           <Route path="/lunchrooms" component = { Lunchrooms } />
           <Route path="/tickets/:id" component = { Ticket } />
           <Route path="/admins/:id" component = { Admin } />
+          <Route path="/comments/:id" component = { Comments } />
         </Switch>
       </Router>
     );
