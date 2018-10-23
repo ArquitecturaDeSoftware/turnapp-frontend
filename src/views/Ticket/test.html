@@ -3,7 +3,7 @@
     <h1 className="title">Turnos</h1>
   </div>
   <div className="container">
-    <div className="row" style={{marginTop:"5%"}}>
+    <div className="row" style={{marginTop:"2%"}}>
       <div className="col-md-4">
         <div className="thumbnail">
           <img src={ biologia }
@@ -16,7 +16,7 @@
       </div>
       <div className="col-md-4">
         <div className="ticket-container">
-          <h1 className="ticket-text">Hello</h1>
+          <h1 className="ticket-text">{this.props.match.params.id}</h1>
         </div>
       </div>
     </div>
@@ -38,8 +38,36 @@
         <PriceNTimeInfoComponent
         price={this.info.price}
         line={this.info.line}
-        time={this.props.time}
+        currentTime={this.props.currentTime}
         />
+        <button type="button"
+        className="btn btn-danger btn-lg btn-block"
+        name="button"
+        style={{marginBottom:"2%"}}
+        target="cancel_ticket">
+          cancelar turno
+        </button>
+        <div id="cancel_ticket" class="modal fade" role="dialog">
+          <div class="modal-dialog modal-sm">
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Cancelar turno</h4>
+              </div>
+              <div class="modal-body">
+                <p>Su turno será cancelado. Precione "Aceptar"</p>
+              </div>
+              <div class="modal-footer">
+                <Link to="/lunchrooms">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Aceptar
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
