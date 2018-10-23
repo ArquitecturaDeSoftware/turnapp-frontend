@@ -7,8 +7,9 @@ class LunchroomComponent extends Component {
   constructor(){
     super();
     this.state = {
-      isActive:false
+      isActive:false,
     }
+
   }
   componentWillMount(){
     Modal.setAppElement('body');
@@ -34,6 +35,7 @@ class LunchroomComponent extends Component {
               <Modal isOpen={this.state.isActive}
               onRequestClose={this.toggleModal}>
                 <LunchroomModalComponent
+                id_lunchroom={this.props.id_lunchroom}
                 name={this.props.name}
                 src={this.props.src}/>
               </Modal>

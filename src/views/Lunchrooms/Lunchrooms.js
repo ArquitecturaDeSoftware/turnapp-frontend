@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 //Components
 import LunchroomComponent from './LunchroomComponent';
@@ -15,19 +16,45 @@ import comedor_central from '../../images/lunchrooms/comedor-central.png';
 import hemeroteca from '../../images/lunchrooms/hemeroteca.png';
 import matematicas from '../../images/lunchrooms/matematicas.png';
 import odontologia from '../../images/lunchrooms/odontologia.png';
+import geologia from '../../images/lunchrooms/geologia.png';
 
 class Lunchrooms extends Component {
-  lunchrooms = [
-    {name:"Biología", ed:"Edificio: 421", src:biologia},
-    {name:"Café Campus", ed:"Edificio: 212 parte posterior", src:cafe_campus},
-    {name:"Ciencias Agrarias", ed:"Edificio: 500", src:ciencias_agrarias},
-    {name:"Ciencias Económicas", ed:"Edificio: 310", src:ciencias_economicas},
-    {name:"Ciencias Humanas", ed:"Edificio: 212", src:ciencias_humanas},
-    {name:"Comedor Central", ed:"Edificio: 103", src:comedor_central},
-    {name:"Hemeroteca", ed:"Edificio: 571", src:hemeroteca},
-    {name:"Matemáticas", ed:"Edificio: 404", src:matematicas},
-    {name:"Odontología", ed:"Edificio: 210", src:odontologia}
-  ]
+  constructor(){
+    super()
+
+    this.state = {
+      all_lunchrooms : [],
+      srcs : [geologia, comedor_central, biologia, cafe_campus, ciencias_agrarias, ciencias_economicas, ciencias_humanas,
+        hemeroteca, matematicas, odontologia]
+    };
+
+    axios({
+      url: 'http://35.229.97.157:5000/graphql/?',
+      method: 'post',
+      data: {
+        query: `
+          query{
+            allLunchrooms{
+              _id
+              name
+              numlunch
+              openTime
+              closeTime
+              building
+            }
+          }
+          `
+      }
+    }).then(result => {
+        this.setState({
+          all_lunchrooms: result.data.data.allLunchrooms 
+        })
+    }).catch(error => {
+      console.log(error)
+    });
+  }
+  
+
   render() {
     return (
       <div className="Lunchrooms">
@@ -36,12 +63,13 @@ class Lunchrooms extends Component {
         </div>
         <div className="container container-container">
           <div className="row">
-            { this.lunchrooms.map(lunchroom =>
-              <LunchroomComponent
-              key={lunchroom.name}
+            { this.state.all_lunchrooms.map((lunchroom, i) =>
+            <LunchroomComponent
+              key={lunchroom._id}
+              id_lunchroom={lunchroom._id}
               name={lunchroom.name}
-              src={lunchroom.src}
-              ed={lunchroom.ed}/>) }
+              src={this.state.srcs[i]}
+              ed={"Edificio: "+lunchroom.building}/>) }
           </div>
         </div>
       </div>

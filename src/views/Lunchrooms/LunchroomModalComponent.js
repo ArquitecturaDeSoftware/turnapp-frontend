@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 //components
 import MenuInfoComponent from "../../components/MenuInfoComponent";
@@ -28,30 +28,39 @@ class LunchroomModalComponent extends Component {
   constructor( props ){
     super( props );
     this.state = {
-      currentTime:this.info.line
+      currentTime:this.info.line,
+      menu:{}
     }
-    
+
     axios({
       url: 'http://35.229.97.157:5000/graphql/?',
       method: 'post',
       data: {
         query: `
           query{
-            allStatistics{
-              t{
-                date
-              }
+            menusByRestaurant(id_restaurant:"${this.props.id_lunchroom}"){
+              soup
+              appetizer
+              main_course
+              protein
+              juice
+              dessert
+              salad
             }
           }
           `
       }
-    }).then((result) => {
-      console.log(result.data)
+    }).then(result => {
+        this.setState({
+          menu: result.data.data.menusByRestaurant[0] 
+        })
+        console.log(this.state.menu)
     }).catch(error => {
       console.log(error)
     });
 
   }
+
   tick(){
     this.setState(( prevState, props ) => ({
       currentTime: prevState.currentTime - 1
@@ -85,23 +94,23 @@ class LunchroomModalComponent extends Component {
             <div className="row">
               <div className="col-md-6">
                 <MenuInfoComponent
-                soup={this.menu.soup}
-                appetizer={this.menu.appetizer}
-                main_course={this.menu.main_course}
-                protein={this.menu.protein}
-                juice={this.menu.juice}
-                dessert={this.menu.dessert}
-                salad={this.menu.salad}
+                  soup={this.state.menu.soup}
+                  appetizer={this.state.menu.appetizer}
+                  main_course={this.state.menu.main_course}
+                  protein={this.state.menu.protein}
+                  juice={this.state.menu.juice}
+                  dessert={this.state.menu.dessert}
+                  salad={this.state.menu.salad}
                 />
               </div>
               <div className="col-md-6">
                 <PriceNTimeInfoComponent
-                price={this.info.price}
-                line={this.info.line}
-                time={this.state.currentTime}
+                  price={this.info.price}
+                  line={this.info.line}
+                  time={this.state.currentTime}
                 />
 
-                //En vez de "1", colocar el id del turno creado
+    //En vez de "1", colocar el id del turno creado
                 <Link to="tickets/1">
                   <button type="button"
                   className="btn btn-primary btn-lg btn-block"
