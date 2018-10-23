@@ -29,7 +29,7 @@ class CommentComponent extends Component {
         <div className="col-md-12" style={{marginTop:"2%"}}>
           <div className="media">
             <div className="media-left media-top">
-              <img src={ this.props.avatar } className="media-object" style={{width:"80px"}}/>
+              <img src={ this.props.avatar } alt="?" className="media-object" style={{width:"80px"}}/>
             </div>
             <div className="media-body">
               <h4 className="media-heading">

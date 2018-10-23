@@ -88,6 +88,8 @@ class LunchroomModalComponent extends Component {
         <div className="container" style={{marginTop:"2%"}}>
           <div className="row">
             <div className="col-md-4">
+            </div>
+            <div className="col-md-4">
               <div className="thumbnail">
                 <img src={ this.props.src }
                 className="small"

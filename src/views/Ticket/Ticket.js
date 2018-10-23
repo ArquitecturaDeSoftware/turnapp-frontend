@@ -84,11 +84,31 @@ class Ticket extends Component {
         this.setState({
           menu: result.data.data.menusByRestaurant[0] 
         })
-        console.log(this.state.menu)
     }).catch(error => {
       console.log(error)
     });
 
+  }
+
+  handlerClick = (e) => {
+    axios({
+      url: 'http://35.229.97.157:5000/graphql/?',
+      method: 'post',
+      data: {
+        query: `
+            mutation{
+              updateTicket(id_ticket: "${this.state.id_ticket}", ticket:{
+                status: "ERROR"
+              }){
+                id
+              }
+            }
+          `
+      }
+    }).then(result => {
+    }).catch(error => {
+      console.log(error)
+    });
   }
 
   render() {
@@ -135,11 +155,12 @@ class Ticket extends Component {
               line={this.info.line}
               currentTime={this.props.currentTime}
               />
-              <Link to="/lunchrooms">
+              <Link to={{ pathname: `/lunchrooms`, state: { id_user:this.props.location.state.id_user} }}>
                 <button type="button"
                 className="btn btn-danger btn-lg btn-block"
                 name="cancelar"
-                style={{marginBottom:"2%"}}>
+                style={{marginBottom:"2%"}}
+                onClick={this.handlerClick}>
                   cancelar turno
                 </button>
               </Link>
