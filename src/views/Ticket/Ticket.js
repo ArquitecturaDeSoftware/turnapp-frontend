@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 
 //Components
 import MenuInfoComponent from "../../components/MenuInfoComponent";
@@ -19,29 +21,72 @@ import odontologia from '../../images/lunchrooms/odontologia.png';
 import geologia from '../../images/lunchrooms/geologia.png';
 
 class Ticket extends Component {
-  menu={
-    id_menu:1,
-    id_lunchroom:"asdnkjh13u4982u3",
-    date:"20/10/18",
-    soup:"changua",
-    appetizer:"lenteja",
-    main_course:"arroz",
-    protein:"pollo",
-    juice:"maracuya",
-    dessert:"piazza",
-    salad:"ensalada de frutas"
-    }
+
   info={
     price:5000,
     line:20,
     time:10
   }
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state={
       srcs : [geologia, comedor_central, biologia, cafe_campus, ciencias_agrarias, ciencias_economicas, ciencias_humanas,
-        hemeroteca, matematicas, odontologia]
+        hemeroteca, matematicas, odontologia],
+      id_ticket : 0,
+      menu:{}
     };
+
+    axios({
+      url: 'http://35.229.97.157:5000/graphql/?',
+      method: 'post',
+      data: {
+        query: `
+            mutation{
+              createTicket(ticket:{
+                lunchroomId: "${this.props.location.state.id_lunchroom}"
+                userId: ${(this.props.location.state.id_user)}
+                price: ${(this.props.location.state.price_user)}
+              }){
+                id
+              }
+            }
+          `
+      }
+    }).then(result => {
+        this.setState({
+          id_ticket: result.data.data.createTicket.id 
+        });
+    }).catch(error => {
+      console.log(error)
+    });
+    
+    axios({
+      url: 'http://35.229.97.157:5000/graphql/?',
+      method: 'post',
+      data: {
+        query: `
+          query{
+            menusByRestaurant(id_restaurant:"${this.props.location.state.id_lunchroom}"){
+              soup
+              appetizer
+              main_course
+              protein
+              juice
+              dessert
+              salad
+            }
+          }
+          `
+      }
+    }).then(result => {
+        this.setState({
+          menu: result.data.data.menusByRestaurant[0] 
+        })
+        console.log(this.state.menu)
+    }).catch(error => {
+      console.log(error)
+    });
+
   }
 
   render() {
@@ -64,7 +109,7 @@ class Ticket extends Component {
             </div>
             <div className="col-md-4">
               <div className="ticket-container">
-                <h1 className="ticket-text">{this.props.match.params.id}</h1>
+                <h1 className="ticket-text">{"Turno: "+this.state.id_ticket}</h1>
               </div>
             </div>
           </div>
@@ -73,18 +118,18 @@ class Ticket extends Component {
           <div className="row">
             <div className="col-md-6">
               <MenuInfoComponent
-              soup={this.menu.soup}
-              appetizer={this.menu.appetizer}
-              main_course={this.menu.main_course}
-              protein={this.menu.protein}
-              juice={this.menu.juice}
-              dessert={this.menu.dessert}
-              salad={this.menu.salad}
+              soup={this.state.menu.soup}
+              appetizer={this.state.menu.appetizer}
+              main_course={this.state.menu.main_course}
+              protein={this.state.menu.protein}
+              juice={this.state.menu.juice}
+              dessert={this.state.menu.dessert}
+              salad={this.state.menu.salad}
               />
             </div>
             <div className="col-md-6">
               <PriceNTimeInfoComponent
-              price={this.info.price}
+              price={this.props.location.state.price_user}
               line={this.info.line}
               currentTime={this.props.currentTime}
               />

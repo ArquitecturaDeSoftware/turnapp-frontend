@@ -15,7 +15,7 @@ class AppRoutes extends Component {
         <Switch>
           <Route path="/" component = { Home } exact />
           <Route path="/lunchrooms" component = { Lunchrooms } />
-          <Route path="/tickets/:id" component = { Ticket } />
+          <Route path="/tickets" component = { Ticket } />
           <Route path="/admins/:id" component = { Admin } />
         </Switch>
       </Router>

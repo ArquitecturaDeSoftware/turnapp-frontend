@@ -11,6 +11,7 @@ class LunchroomComponent extends Component {
     }
 
   }
+
   componentWillMount(){
     Modal.setAppElement('body');
   }
@@ -20,6 +21,9 @@ class LunchroomComponent extends Component {
       isActive:!this.state.isActive
     })
   }
+
+  
+
   render() {
     return (
       <div className="LunchroomComponent">
@@ -38,7 +42,8 @@ class LunchroomComponent extends Component {
                   id_lunchroom={this.props.id_lunchroom}
                   name={this.props.name}
                   src={this.props.src}
-                  i={this.props.i}/>
+                  i={this.props.i}
+                  id_user={this.props.id_user}/>
               </Modal>
             </div>
           </div>

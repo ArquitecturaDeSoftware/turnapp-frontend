@@ -16,6 +16,21 @@ import matematicas from '../../images/lunchrooms/matematicas.png';
 import odontologia from '../../images/lunchrooms/odontologia.png';
 
 class Home extends Component {
+  constructor(){
+    super()
+    this.state = {
+      id_user:`${Math.ceil(1000 + Math.random() * (9999 - 1000))}`,
+      id_user_ced:""
+    };
+  }
+
+  handlerInput = (e) => {
+    this.setState({
+      id_user_ced: e.target.value
+    })
+  }
+  
+  
   render() {
     return (
       <div className="Home">
@@ -109,15 +124,24 @@ class Home extends Component {
                 className="input-group"
                 style={{marginTop:"25%"}}>
                   <span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
-                  <input id="email" type="text" className="form-control" name="cedula" placeholder="Cédula"/>
+                  <input id="email" type="text" className="form-control" ref="cedula" placeholder="Cédula" onChange={this.handlerInput}/>
                 </div>
-                <Link to="/lunchrooms">
+                <Link to={{ pathname: `/lunchrooms`, state: { id_user:this.state.id_user_ced} }}>
                   <button
                   type="button"
                   name="ingresar"
                   className="btn btn-success btn-lg btn-block"
                   style={{marginTop:"5%"}}>
                     Ingresar
+                  </button>
+                </Link>
+                <Link to={{ pathname: `/lunchrooms`, state: { id_user:this.state.id_user} }}>
+                  <button
+                  type="button"
+                  name="ingresar"
+                  className="btn btn-default btn-lg btn-block"
+                  style={{marginTop:"5%"}}>
+                    Soy invitado
                   </button>
                 </Link>
               </div>

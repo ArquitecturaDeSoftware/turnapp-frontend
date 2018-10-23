@@ -19,8 +19,8 @@ import odontologia from '../../images/lunchrooms/odontologia.png';
 import geologia from '../../images/lunchrooms/geologia.png';
 
 class Lunchrooms extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
     this.state = {
       all_lunchrooms : [],
@@ -70,7 +70,8 @@ class Lunchrooms extends Component {
               name={lunchroom.name}
               src={this.state.srcs[i]}
               ed={"Edificio: "+lunchroom.building}
-              i={i}/>) }
+              i={i}
+              id_user={this.props.location.state.id_user}/>) }
           </div>
         </div>
       </div>

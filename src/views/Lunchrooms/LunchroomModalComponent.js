@@ -31,7 +31,8 @@ class LunchroomModalComponent extends Component {
     this.state = {
       currentTime:this.info.line,
       menu:{},
-      a:2
+      price_user: this.props.id_user > 9999 ? 4800 : 6500,
+      shift: 2,
     }
 
     axios({
@@ -75,6 +76,9 @@ class LunchroomModalComponent extends Component {
     );
   }
 
+
+
+
   render() {
     return (
       <div className="LunchroomModalComponent">
@@ -106,11 +110,13 @@ class LunchroomModalComponent extends Component {
               </div>
               <div className="col-md-6">
                 <PriceNTimeInfoComponent
-                  price={this.info.price}
+                  price={this.state.price_user}
                   line={this.info.line}
                   time={this.state.currentTime}
                 />
-                <Link to={{ pathname: `tickets/${this.state.a}`, state: { name_l:this.props.name, i:this.props.i} }}>
+                <Link to={{ pathname: `tickets/`, state: { name_lunch:this.props.name, 
+                                                           i:this.props.i, id_lunchroom:this.props.id_lunchroom, 
+                                                           id_user:this.props.id_user, price_user:this.state.price_user} }}>
                   <button type="button"
                   className="btn btn-primary btn-lg btn-block"
                   name="button"
